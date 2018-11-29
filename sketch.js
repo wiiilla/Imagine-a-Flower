@@ -1,31 +1,21 @@
 // Qualitative Variables
 
 // dictionary mapping adjs to style set (stroke, weight and fill for flowers, venations, and branches)
-var colorsDict = {};
-// dictionary mapping adjs to texture-drawing functions/ subClass
-var textureDict = {
-  "silky": func,
-  "satin": func,
-  "velvety": func,
-  "matte": func
-};
-// dictionary mapping adjs to shape parameters
-var shapeDict = {
-  "shape": "paras"
-};
-// dictionary mapping adjs to sizes
-var sizeDict = {
-  "adj": "num"
-};
-// dictionary mapping adjs to overal qualitives
-var qualityDict = {
-  "adj": "num"
-};
+function palette(img){
+
+}
 
 function sliders_setup () {
+  // general variable: color palette
+
   sliders={};
+  // inflorescense variables:
+  // branches: Number of branches
+  // scale: the strokeWeight multiplier as a branch develops
+  // angle: the angle between 2 adjacent branches
+  // variance: the mutiplier for change, creating more or less organic effect
+
   sliders["inflorescense"] = {};
-  sliders["floret"] = {};
   sliders["inflorescense"]["branches"] = createSlider(0, 1, random(0.8, 1), 0.02);
   sliders["inflorescense"]["branches"].position(10, 10);
   sliders["inflorescense"]["branches"].style('width', '100px');
@@ -45,6 +35,34 @@ function sliders_setup () {
   sliders["inflorescense"]["variance"] = createSlider(0, 1, random(0.8, 1), 0.02);
   sliders["inflorescense"]["variance"].position(10, 90);
   sliders["inflorescense"]["variance"].style('width', '100px');
+
+  // floret variables:
+  // petals: Number of petals
+  // size
+  // shape: circle -> lengthy -> pointy,
+  // contrast: more contrast -> longer stamens, more color contrast:
+  // Texture: silky -> satin -> velvety -> matte
+  sliders["floret"] = {};
+  sliders["floret"]["petals"] = createSlider(0, 1, random(0, 1), 0.02);
+  sliders["floret"]["petals"].position(690, 10);
+  sliders["floret"]["petals"].style('width', '100px');
+
+  sliders["floret"]["size"] = createSlider(0, 1, random(0, 1), 0.02);
+  sliders["floret"]["size"].position(690, 30);
+  sliders["floret"]["size"].style('width', '100px');
+
+  sliders["floret"]["shape"] = createSlider(0, 1, random(0, 1), 0.02);
+  sliders["floret"]["shape"].position(690, 50);
+  sliders["floret"]["shape"].style('width', '100px');
+
+  sliders["floret"]["contrast"] = createSlider(0, 1, random(0, 1), 0.02);
+  sliders["floret"]["contrast"].position(690, 70);
+  sliders["floret"]["contrast"].style('width', '100px');
+
+  sliders["floret"]["texture"] = createSlider(0, 1, random(0, 1), 0.02);
+  sliders["floret"]["texture"].position(690, 90);
+  sliders["floret"]["texture"].style('width', '100px');
+
 }
 
 function vary (n, v, bound1, bound2) {
@@ -86,12 +104,20 @@ function draw() {
   ellipse(0, 0, min(width, height) * 4 / 5, min(width, height) * 4 / 5);
   smooth();
 
-  v1 = sliders["inflorescense"]["branches"].value();
-  v2 = sliders["inflorescense"]["scale"].value();
-  v3 = sliders["inflorescense"]["angle"].value();
-  v4 = sliders["inflorescense"]["layers"].value();
-  v5 = sliders["inflorescense"]["variance"].value();
-  panicle(v1, v2, v3, v4, v5);
+  var params = []
+  params.push(sliders["inflorescense"]["branches"].value())
+  params.push(sliders["inflorescense"]["scale"].value())
+  params.push(sliders["inflorescense"]["angle"].value())
+  params.push(sliders["inflorescense"]["layers"].value())
+  params.push(sliders["inflorescense"]["variance"].value())
+
+  params.push(sliders["floret"]["petals"].value())
+  params.push(sliders["floret"]["size"].value())
+  params.push(sliders["floret"]["shape"].value())
+  params.push(sliders["floret"]["contrast"].value())
+  params.push(sliders["floret"]["texture"].value())
+
+  branch(params);
 }
 
 function mouseReleased() {

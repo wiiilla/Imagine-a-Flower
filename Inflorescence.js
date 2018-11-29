@@ -1,4 +1,12 @@
 // inflorescence functions
+
+// inflorescense variables:
+// branches: Number of branches
+// scale: the strokeWeight multiplier as a branch develops
+// angle: the angle between 2 adjacent branches
+// variance: the mutiplier for change, creating more or less organic effect
+
+
 function constrainLength (l) {
 	total = 0;
   var lTemp = l;
@@ -34,7 +42,7 @@ function curvyLine(x1, y1, x2, y2) {
   endShape();
 }
 
-function branch(layer) {
+function createBranch(layer) {
   if (layer <= nLayers) {
 
     if (random(1) < 0.7 && layer<= nLayers) {
@@ -45,12 +53,12 @@ function branch(layer) {
       curvyLine(0, 0, 0, length1);
       translate(0, length1);
       length1=constrainLength(vary(length1, variance, -0.1, 0.1))
-      branch(layer + 1);
+      createBranch(layer + 1);
       if (layer == nLayers) {
         for (var i = 0; i <= nLayers; i++) {
           scale(1/s)
         }
-        shape(0,0,10)
+        flower(0,0,fParams)
       }
       pop();
 
@@ -61,34 +69,36 @@ function branch(layer) {
       curvyLine(0, 0, 0, length2);
       translate(0, length2);
       length2=constrainLength(vary(length2, variance, -0.1, 0.1))
-      branch(layer + 1);
+      createBranch(layer + 1);
       if (layer == nLayers) {
         for (var i = 0; i <= nLayers; i++) {
           scale(1/s)
         }
-        shape(0,0,10)
+        flower(0,0,fParams)
       }
       pop();
 
     }
     else {
-      branch(layer)
+      createBranch(layer)
     }
 	}
 }
 
-function panicle(v1, v2, v3, v4, v5) {
-  // v1: num of branches
-  // v2: overall shape, expanding or not, scale
-  // v3: angle of branching
-  // v4: layering
-  // v5: variance
-  nBranches = map(pow(v1, 3/4), 0, 1, 1, 10)
-  s = map(v2, 0, 1, 0.5, 1.01);
-  branchAngle = map(v3, 0, 1, TWO_PI / 30, TWO_PI / 15);
-  nLayers = int(map(pow(v4, 3/4), 0, 1, 0, 8));
-  variance = pow(v5, 1/4);
+function branch(params) {
+  // 0: num of branches
+  // 1: overall shape, expanding or not, scale
+  // 2: angle of branching
+  // 3: layering
+  // 4: variance
 
+  nBranches = map(pow(params[0], 3/4), 0, 1, 1, 10)
+  s = map(params[1], 0, 1, 0.5, 1.01);
+  branchAngle = map(params[2], 0, 1, TWO_PI / 30, TWO_PI / 15);
+  nLayers = int(map(pow(params[3], 3/4), 0, 1, 0, 8));
+  variance = pow(params[4], 1/4);
+
+	fParams = params.slice(4,);
 
   noi1 = 0
   for (var i = 0; i < nBranches; i++) {
@@ -104,7 +114,7 @@ function panicle(v1, v2, v3, v4, v5) {
     stroke(0, 0, 50, 1);
     noFill();
 
-    branch(0);
+    createBranch(0);
   }
 
 }
