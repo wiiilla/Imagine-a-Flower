@@ -27,9 +27,10 @@ function flower(x, y, fParams) {
   pq = pqs[int(map(fParams[2], 0, 1, 0, pqs.length-1))][0]
   period = pqs[int(map(fParams[2], 0, 1, 0, pqs.length-1))][1] *2
 	b = mapb(fParams[3])
-	a = map(fParams[1], 0, 1, 1, 10)
-  offset = map(fParams[3], 0, 1, 1.03, 1.25)
+	a = map(fParams[1], 0, 1, 1, 5)
+  offset = map(fParams[3], 0, 1, 1.03, 1.05)
 
+//#############################################################################  
   colors = {"outer": color(0, 60, 80, 0.5), "stroke": color(0, 0, 100, 0.7), "inner": color(0, 90, 100, 0.7)}
 
 	rose(x, y, a, pq, b, period, offset, colors)

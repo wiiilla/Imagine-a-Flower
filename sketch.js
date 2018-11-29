@@ -47,7 +47,7 @@ function sliders_setup () {
   sliders["floret"]["petals"].position(690, 10);
   sliders["floret"]["petals"].style('width', '100px');
 
-  sliders["floret"]["size"] = createSlider(0, 1, random(0, 1), 0.02);
+  sliders["floret"]["size"] = createSlider(0, 1, random(0, 0.5), 0.02);
   sliders["floret"]["size"].position(690, 30);
   sliders["floret"]["size"].style('width', '100px');
 
@@ -55,7 +55,7 @@ function sliders_setup () {
   sliders["floret"]["shape"].position(690, 50);
   sliders["floret"]["shape"].style('width', '100px');
 
-  sliders["floret"]["contrast"] = createSlider(0, 1, random(0, 1), 0.02);
+  sliders["floret"]["contrast"] = createSlider(0, 1, random(0, 0.5), 0.02);
   sliders["floret"]["contrast"].position(690, 70);
   sliders["floret"]["contrast"].style('width', '100px');
 
@@ -88,8 +88,8 @@ function setup() {
   colorMode(HSB, 360, 100, 100, 1);
   angleMode(RADIANS);
 
-  //frameRate(10);
-  noLoop();
+  frameRate(10);
+  //noLoop();
 
   // Sliders
   sliders_setup();
@@ -123,6 +123,6 @@ function draw() {
 }
 
 function mouseReleased() {
-  //sliders_setup()
+  sliders_setup();
   redraw();
 }

@@ -58,7 +58,7 @@ function createBranch(layer) {
         for (var i = 0; i <= nLayers; i++) {
           scale(1/s)
         }
-      if (random(0,1) < 0.3) {flower(0,0,fParams)}
+      if (random(1) < 0.2) {flower(0,0,fParams)}
       }
       pop();
 
@@ -74,7 +74,7 @@ function createBranch(layer) {
         for (var i = 0; i <= nLayers; i++) {
           scale(1/s)
         }
-      if (random(0,1) < 0.3) {flower(0,0,fParams)}
+      if (random() < random(0.2, 0.6) ) {flower(0,0,fParams)}
       }
       pop();
 
@@ -98,7 +98,7 @@ function branch(params) {
   nLayers = int(map(pow(params[3], 3/4), 0, 1, 0, 8));
   variance = pow(params[4], 1/4);
 
-	fParams = params.slice(6,);
+	fParams = params.slice(5,);
 
   noi1 = 0
   for (var i = 0; i < nBranches; i++) {
