@@ -87,10 +87,12 @@ function setup() {
   maxDiam = min(width, height) * 4 / 5
   colorMode(HSB, 360, 100, 100, 1);
   angleMode(RADIANS);
+
+  //frameRate(10);
   noLoop();
 
   // Sliders
-  sliders_setup()
+  sliders_setup();
 
   createCanvas(width, height);
 }
