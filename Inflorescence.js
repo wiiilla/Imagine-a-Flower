@@ -1,11 +1,19 @@
 // inflorescence functions
 
-// inflorescense variables:
-// branches: Number of branches
-// scale: the strokeWeight multiplier as a branch develops
-// angle: the angle between 2 adjacent branches
-// variance: the mutiplier for change, creating more or less organic effect
+// Inflorescense variables:
+// branches/brancing : total number of branches
+// scale/scaling : the scaling factor; the strokeWeight multiplier as a branch develops
+// angle/expansion: the angle between 2 adjacent branches
+// layers/laying: the number of layers a branch branches out
+// variance/randomization: the mutiplier for randomization, creating more or less organic effect
 
+function vary (n, v, bound1, bound2) {
+  // Randomization by power
+  v = map(v, 0, 1, 0.1, 0.99)
+  var lst = [bound1, bound1*0.95, bound1*0.9, bound1*0.8,bound1*0.5, bound2, bound2*0.9, bound2*0.95, bound2*0.8, bound2*0.5]
+  var multiplier = pow(v, 2) * lst[int(random(0,8))]
+	return n*(1+multiplier)
+}
 
 function constrainLength (l) {
 	total = 0;
@@ -44,7 +52,7 @@ function curvyLine(x1, y1, x2, y2) {
 
 function createBranch(layer) {
   if (layer <= nLayers) {
-
+		// L-system recursion
     if (random(1) < 0.7 && layer<= nLayers) {
       push();
       rotate(branchAngle + variance * random(-TWO_PI/12, TWO_PI/12));
@@ -55,10 +63,13 @@ function createBranch(layer) {
       length1=constrainLength(vary(length1, variance, -0.1, 0.1))
       createBranch(layer + 1);
       if (layer == nLayers) {
+				push();
         for (var i = 0; i <= nLayers; i++) {
           scale(1/s)
         }
-      if (random(1) < 0.2) {flower(0,0,fParams)}
+			// fParams[0]: probability of having a flower on the tip
+      if (random(1) < fParams[0]) {flower(fParams)}
+			pop();
       }
       pop();
 
@@ -71,10 +82,12 @@ function createBranch(layer) {
       length2=constrainLength(vary(length2, variance, -0.1, 0.1))
       createBranch(layer + 1);
       if (layer == nLayers) {
+				push();
         for (var i = 0; i <= nLayers; i++) {
           scale(1/s)
         }
-      if (random() < random(0.2, 0.6) ) {flower(0,0,fParams)}
+      if (random(1) < fParams[0]) {flower(fParams)}
+			pop();
       }
       pop();
 
@@ -86,21 +99,15 @@ function createBranch(layer) {
 }
 
 function branch(params) {
-  // 0: num of branches
-  // 1: overall shape, expanding or not, scale
-  // 2: angle of branching
-  // 3: layering
-  // 4: variance
-
-  nBranches = map(pow(params[0], 3/4), 0, 1, 1, 10)
-  s = map(params[1], 0, 1, 0.5, 1.01);
+	// Map Variables
+  nBranches = map(pow(params[0], 3/4), 0, 1, 1, 4)
+  s = map(params[1], 0, 1, 0.7, 1.01);
   branchAngle = map(params[2], 0, 1, TWO_PI / 30, TWO_PI / 15);
-  nLayers = int(map(pow(params[3], 3/4), 0, 1, 0, 8));
+  nLayers = int(map(pow(params[3], 3/4), 0, 1, 0, 4));
   variance = pow(params[4], 1/4);
 
 	fParams = params.slice(5,);
 
-  noi1 = 0
   for (var i = 0; i < nBranches; i++) {
     rotate(vary(TWO_PI / nBranches, variance, -0.05, 0.05));
     layer = 0;
@@ -108,6 +115,7 @@ function branch(params) {
     var lTemp = vary( min(width, height)/4, variance, -1, 0);
     length1 = constrainLength( lTemp);
     length2 = constrainLength( lTemp);
+
     strokeJoin(ROUND)
     strokeCap(ROUND)
     strokeWeight(2);
