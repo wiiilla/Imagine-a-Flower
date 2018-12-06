@@ -88,8 +88,8 @@ function setup() {
   colorMode(HSB, 360, 100, 100, 1);
   angleMode(RADIANS);
 
-  frameRate(10);
-  //noLoop();
+  //frameRate(10);
+  noLoop();
 
   // Sliders
   sliders_setup();
@@ -123,6 +123,6 @@ function draw() {
 }
 
 function mouseReleased() {
-  sliders_setup();
+  //sliders_setup();
   redraw();
 }
