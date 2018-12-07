@@ -2,7 +2,7 @@
 
 // Developed by Willa Hua as an art project
 // Based on plant morphology, recursion and rose curves
-// Inspired by ################
+// Inspired by Holger Lippmann and Diana Lange
 // willahua.com
 // Github username: wiiilla
 
@@ -25,12 +25,20 @@
 // shape2/volume: the number of layers a branch branches out
 // color/color: the mutiplier for randomization, creating more or less organic effect
 
-//#############
 function palette(i){
   // Costumize color palette here
   p = [
-    {"inner": color(0, 90, 90, 1), "stroke": color(0, 0, 100, 0.5), "outer": color(0, 90, 100, 0.6)}
+    {"inner": color("#A61E15"), "stroke": color("#EBA52B"), "outer": color("#E95C31")},
+    {"inner": color("#D24240"), "stroke": color("#D24240"), "outer": color("#E57B75")},
+    {"inner": color("#F56D5E"), "stroke": color("#FCFCFD"), "outer": color("#F4C3C3")},
+    {"inner": color("#E57B75"), "stroke": color("#CBB3A7"), "outer": color("#EFE8DE")}
   ];
+  // set transparency
+  for (var j=0; j<4 ; j++) {
+    p[j]["inner"]["_array"][3] = 1;
+    p[j]["stroke"]["_array"][3] = 0.9;
+    p[j]["outer"]["_array"][3] = 0.8;
+  }
   return  (p[int(map(i, 0, 1, 0, p.length))]);
 }
 
@@ -102,24 +110,34 @@ function setup() {
 
 function draw() {
   // UI
-  background(90);
+  background(100);
   noStroke();
   fill(70);
   rect(0, 0, width, 200);
 
-  fill(100);
+  var backgroundColor = color("#36481D");
+  backgroundColor["_array"][3] = 0.15;
+  fill(backgroundColor);
   ellipse(400, 600, min(width, height) * 4 / 5, min(width, height) * 4 / 5);
 
   fill(255);
   textSize(16);
   textLeading(20);
   textAlign(LEFT, CENTER);
-  text ("Flower Generator - more documentation available at willahua.com \nSlide to generate, click to redraw, double-click to save image to local computer.", 20, 35)
+  text ("Flower Generator - more documentation available at willahua.com \nSlide to generate, use Regenerate botton or double-click to redraw, use Save to Local button to save image.", 20, 35)
   var text1 = ["Branching", "Scaling", "Expansion", "Layering", "Randomization"];
   var text2 = ["Blossom", "Mass", "Shape", "Volume", "Color"];
 
   for (var i= 0; i <= 4; i++ ) {text(text1[i], 20, 78+25*i)}
   for (var i= 0; i <= 4; i++ ) {text(text2[i], 400, 78+25*i)}
+
+  re = createButton("Regenerate")
+  re.position (700, 140);
+  re.mousePressed(redraw);
+
+  sav = createButton("Save to Local")
+  sav.position (700, 170);
+  sav.mousePressed(saveFile);
 
   translate(width / 2, height / 2+100);
   smooth();
@@ -141,13 +159,11 @@ function draw() {
   branch(params);
 }
 
-function mouseReleased() {
+function doubleClicked() {
   redraw();
 }
 
-function doubleClicked() {
-  // Default file name
-  // ########
+function saveFile() {
   save("flower"+str(saveCounter)+".png")
   saveCounter = saveCounter + 1;
 }
