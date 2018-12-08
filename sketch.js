@@ -50,44 +50,54 @@ function sliders_setup () {
   sliders["inflorescense"]["branches"] = createSlider(0, 1, random(0.8, 1), 0.02);
   sliders["inflorescense"]["branches"].position(140, 70);
   sliders["inflorescense"]["branches"].style('width', '100px');
+  sliders["inflorescense"]["branches"].mousePressed(redraw);
 
   sliders["inflorescense"]["scale"] = createSlider(0, 1, random(0, 0.5), 0.02);
   sliders["inflorescense"]["scale"].position(140, 95);
   sliders["inflorescense"]["scale"].style('width', '100px');
+  sliders["inflorescense"]["scale"].mousePressed(redraw);
 
   sliders["inflorescense"]["angle"] = createSlider(0, 1, random(0, 0.5), 0.02);
   sliders["inflorescense"]["angle"].position(140, 120);
   sliders["inflorescense"]["angle"].style('width', '100px');
+  sliders["inflorescense"]["angle"].mousePressed(redraw);
 
   sliders["inflorescense"]["layers"] = createSlider(0, 1, random(0.8, 1), 0.02);
   sliders["inflorescense"]["layers"].position(140, 145);
   sliders["inflorescense"]["layers"].style('width', '100px');
+  sliders["inflorescense"]["layers"].mousePressed(redraw);
 
   sliders["inflorescense"]["variance"] = createSlider(0, 1, random(0.2, 0.6), 0.02);
   sliders["inflorescense"]["variance"].position(140, 170);
   sliders["inflorescense"]["variance"].style('width', '100px');
+  sliders["inflorescense"]["variance"].mousePressed(redraw);
 
   // Floret variables:
   sliders["floret"] = {};
   sliders["floret"]["blossom"] = createSlider(0, 1, random(0.2, 0.6), 0.02);
   sliders["floret"]["blossom"].position(500, 70);
   sliders["floret"]["blossom"].style('width', '100px');
+  sliders["floret"]["blossom"].mousePressed(redraw);
 
   sliders["floret"]["size"] = createSlider(0, 1, random(0.1, 0.6), 0.02);
   sliders["floret"]["size"].position(500, 95);
   sliders["floret"]["size"].style('width', '100px');
+  sliders["floret"]["size"].mousePressed(redraw);
 
   sliders["floret"]["shape1"] = createSlider(0, 1, random(0, 1), 0.02);
   sliders["floret"]["shape1"].position(500, 120);
   sliders["floret"]["shape1"].style('width', '100px');
+  sliders["floret"]["shape1"].mousePressed(redraw);
 
   sliders["floret"]["shape2"] = createSlider(0, 1, random(0, 0.8), 0.02);
   sliders["floret"]["shape2"].position(500, 145);
   sliders["floret"]["shape2"].style('width', '100px');
+  sliders["floret"]["shape2"].mousePressed(redraw);
 
   sliders["floret"]["color"] = createSlider(0, 1, random(0, 1), 0.02);
   sliders["floret"]["color"].position(500, 170);
   sliders["floret"]["color"].style('width', '100px');
+  sliders["floret"]["color"].mousePressed(redraw);
 
 }
 
