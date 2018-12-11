@@ -100,10 +100,10 @@ function createBranch(layer) {
 
 function branch(params) {
 	// Map Variables
-  nBranches = map(pow(params[0], 3/4), 0, 1, 1, 4)
+  nBranches = map(pow(params[0], 3/4), 0, 1, 1, 6)
   s = map(params[1], 0, 1, 0.7, 1.01);
   branchAngle = map(params[2], 0, 1, TWO_PI / 30, TWO_PI / 15);
-  nLayers = int(map(pow(params[3], 3/4), 0, 1, 0, 4));
+  nLayers = int(map(pow(params[3], 3/4), 0, 1, 0, 7));
   variance = pow(params[4], 1/4);
 
 	fParams = params.slice(5,);

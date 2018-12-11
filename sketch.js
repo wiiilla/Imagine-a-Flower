@@ -39,7 +39,7 @@ function palette(i){
     p[j]["stroke"]["_array"][3] = 0.9;
     p[j]["outer"]["_array"][3] = 0.8;
   }
-  return  (p[int(map(i, 0, 1, 0, p.length))]);
+  return  (p[round(map(i, 0, 1, 0, p.length))]);
 }
 
 
